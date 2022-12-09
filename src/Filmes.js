@@ -5,7 +5,7 @@ export default function Filmes(){
     return (
         <Conteudo>
             <div className="titulo">Selecione o filme</div>
-            <Filme/>
+           <Filme/>
         </Conteudo>
     )
 }
@@ -13,6 +13,7 @@ const Conteudo=styled.div`
 margin-top: 10vh;
 height: 80vh;
 background: white;
+color:#293845;
 font-family: 'Roboto';
 font-size: 24px;
 font-weight: 400;

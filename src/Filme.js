@@ -1,16 +1,24 @@
 import styled from "styled-components"
 import image3 from  "./img/image3.png"
 import image6 from  "./img/image6.png"
-import {link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom"
 export default function Filme(){
     const POSTERS=[image3,image6,image3,image6,image3,image6,image3,image6,image3,image6];
+    const Navigate=useNavigate();
+    function Navegar(caminho){
+        Navigate(caminho);
+    }
     return (
         <Conteudo>
             
             {POSTERS.map((poster,index)=>
-            <div key={index}className="moldura">
+            
+            <div onClick={()=>Navegar("/sessoes")}key={index}className="moldura">
             <img key={index+1}src={poster} alt={`poster filme ${index+1}`}/>
-            </div>)}
+            </div>
+            
+            )}
             
         </Conteudo>
     )
