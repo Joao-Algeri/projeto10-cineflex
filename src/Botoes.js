@@ -8,7 +8,7 @@ export default function Botoes({horarios}){
     
     return (
         <Conteudo>
-            {horarios.map((horario)=><button onClick={()=>Navegar("/assentos")}>{horario.name}</button>)}
+            {horarios.map((horario)=><button  key={horario.id}onClick={()=>Navegar("/assentos")}>{horario.name}</button>)}
         </Conteudo>
     )
 }
