@@ -1,5 +1,4 @@
-import styled from "styled-components"
-import {useState,useEffect} from 'react'
+import {useState,} from 'react'
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Topo from "./Topo"
 import Filmes from "./Filmes"
@@ -16,7 +15,7 @@ export default function App() {
         <Route path="/" element={<Filmes/>}/>
         <Route path="/sessoes/:idsessao" element={<Sessoes/>}/>
         <Route path="/assentos/:idassento" element={<Assentos ingresso={ingresso} setIngresso={setIngresso}/>}/>
-        <Route path="/sucesso" element={<Sucesso setIngresso={setIngresso}/>}/>
+        <Route path="/sucesso" element={<Sucesso ingresso={ingresso} setIngresso={setIngresso}/>}/>
         </Routes>
     </BrowserRouter>
   )

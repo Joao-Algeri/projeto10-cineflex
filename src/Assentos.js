@@ -1,326 +1,106 @@
 import styled from "styled-components"
 import axios from "axios"
-import image6 from  "./img/image6.png"
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./reset.css";
-export default function Assentos({setIngresso}) {
-        const ASSENTOS=[
-        {
-            "id": 1,
-            "name": "15:00",
-            "day": {
-                    "id": 24062021,
-              "weekday": "Quinta-feira",
-              "date": "24/06/2021",
-                },
-            "movie": {
-                "id": 1,
-                "title": "2067",
-                "posterURL": "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
-                "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
-                "releaseDate": "2020-10-01T00:00:00.000Z",
-            },
-            "seats": [
-                        {
-                    "id": 1,
-                    "name": "1",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 2,
-                    "name": "2",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 3,
-                    "name": "3",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 4,
-                    "name": "4",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 5,
-                    "name": "5",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 6,
-                    "name": "6",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 7,
-                    "name": "7",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 8,
-                    "name": "8",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 9,
-                    "name": "9",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 10,
-                    "name": "10",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 11,
-                    "name": "11",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 12,
-                    "name": "12",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 13,
-                    "name": "13",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 14,
-                    "name": "14",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 15,
-                    "name": "15",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 16,
-                    "name": "16",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 17,
-                    "name": "17",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 18,
-                    "name": "18",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 19,
-                    "name": "19",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 20,
-                    "name": "20",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 21,
-                    "name": "21",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 22,
-                    "name": "22",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 23,
-                    "name": "23",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 24,
-                    "name": "24",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 25,
-                    "name": "25",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 26,
-                    "name": "26",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 27,
-                    "name": "27",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 28,
-                    "name": "28",
-                    "isAvailable": false,
-                },
-                {
-                    "id": 29,
-                    "name": "29",
-                    "isAvailable": false,
-                },
-                {
-                    "id": 30,
-                    "name": "30",
-                    "isAvailable": false,
-                },
-                {
-                    "id": 31,
-                    "name": "31",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 32,
-                    "name": "32",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 33,
-                    "name": "33",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 34,
-                    "name": "34",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 35,
-                    "name": "35",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 36,
-                    "name": "36",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 37,
-                    "name": "37",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 38,
-                    "name": "38",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 39,
-                    "name": "39",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 40,
-                    "name": "40",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 41,
-                    "name": "41",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 42,
-                    "name": "42",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 43,
-                    "name": "43",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 44,
-                    "name": "44",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 45,
-                    "name": "45",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 46,
-                    "name": "46",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 47,
-                    "name": "47",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 48,
-                    "name": "48",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 49,
-                    "name": "49",
-                    "isAvailable": true,
-                },
-                {
-                    "id": 50,
-                    "name": "50",
-                    "isAvailable": true,
-                },
-            ]
+export default function Assentos({ ingresso, setIngresso }) {
+    const params = useParams();
+    const navigate = useNavigate();
+    const [assentos, setAssentos] = useState([]);
+    const [selecionados, setSelecionados] = useState([])
+    const [nome, setNome] = useState("");
+    const [CPF, setCPF] = useState("");
+    const [assentosEscolhidos, setAssentosEscolhidos] = useState([]);
+    const [bilhete, setBilhete] = useState([]);
+
+    useEffect(() => {
+        const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idassento}/seats`);
+        requisicao.then(resposta => { setAssentos(resposta.data) })
+    }, [])
+    if (assentos === undefined || assentos.seats === undefined) {
+        return <div>Loading</div>
+    }
+    function Navegar() {
+        if (nome !== null && CPF !== null && nome !== "" && nome !== undefined && CPF !== "" && CPF !== undefined) {
+
+            const novoIngresso = [{ titulo: assentos.movie.title, data: assentos.day.date, horario: assentos.name, Nome: nome, cpf: CPF, assentos: assentosEscolhidos }]
+            setIngresso(novoIngresso);
+            const pedido = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", { ids: assentosEscolhidos, name: nome, cpf: CPF })
+            pedido.then(navigate("/sucesso"))
+            pedido.catch(console.log("erro"))
+
+            // console.log({ids:assentosEscolhidos,name:nome,cpf:CPF})
+            // console.log(ingresso)
         }
-    ]
-    const navigate=useNavigate();
-    function Navegar(){
-        const novoIngresso=[{titulo:"alula",data:"15:00",horario:"111",nome:"aaa",CPF:"aaa",assentos:[1,2,3,4,5]}]
-        setIngresso(novoIngresso);
-        navigate("/sucesso");
+        else {
+            alert("preencha os campos necessários");
+        }
+    }
+    function SelecionaAssento(id, nome) {
+        const novoSelecionados = [...selecionados];
+        const novoEscolhidos = [...assentosEscolhidos];
+        if (selecionados.includes(id)) {
+
+            novoSelecionados.splice(novoSelecionados.indexOf(id), 1);
+            novoSelecionados = novoSelecionados.sort();
+            novoEscolhidos.splice(novoSelecionados.indexOf(nome), 1);
+            novoEscolhidos = novoEscolhidos.sort();
+            setSelecionados(novoSelecionados);
+            setAssentosEscolhidos(novoEscolhidos);
+        }
+        else {
+            novoSelecionados.push(id);
+            novoEscolhidos.push(nome);
+            setSelecionados(novoSelecionados);
+            setAssentosEscolhidos(novoEscolhidos);
+        }
     }
     return (
         <Conteudo>
             <div className="titulo">Selecione o(s) assento(s)</div>
             <div className="assentos-container">
-            {ASSENTOS[0].seats.map((assento)=> assento.isAvailable===true?
-            <div className="assento" key={assento.id}>{assento.name}</div>
-             :
-             <div className="assento amarelo" key={assento.id}>{assento.name}</div>
-        )}
+                {assentos.seats.map((assento) => assento.isAvailable === false ?
+                    <div data-test="seat" className="assento amarelo" key={assento.name}>{assento.name}</div>
+                    :
+                    selecionados.includes(assento.id) ?
+                        <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name)} className="assento verde" key={assento.id}>{assento.name}</div>
+                        :
+                        <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name)} className="assento" key={assento.id}>{assento.name}</div>
+
+                )}
             </div>
             <div className="estados-assentos">
-           
-            <div className="assento-selecionado">
-            <div className="assento verde teste"></div>
-            <div className="">Selecionado</div>
-            </div>
-            <div className="assento-disponivel">
-            <div className="assento teste"></div>
-            <div className="">Disponível</div>
-            </div>
-            <div className="assento-indisponivel">
-            <div className="assento amarelo teste"></div>
-            <div className="">Indisponível</div>
-            </div>               
-            </div>
-                <div className="inputs">
-                <div className="titulo-inputs">Nome do comprador:</div>
-                <input placeholder="Digite seu nome..."/>
-                <div className="titulo-inputs">CPF do comprador:</div>
-                <input placeholder="Digite seu CPF..."/>
+
+                <div className="assento-selecionado">
+                    <div className="assento verde teste"></div>
+                    <div className="">Selecionado</div>
                 </div>
-                <button onClick={()=>Navegar()}>Reservar assento(s)</button>
-                <div className="rodape">
+                <div className="assento-disponivel">
+                    <div className="assento teste"></div>
+                    <div className="">Disponível</div>
+                </div>
+                <div className="assento-indisponivel">
+                    <div className="assento amarelo teste"></div>
+                    <div className="">Indisponível</div>
+                </div>
+            </div>
+            <div className="inputs">
+                <div className="titulo-inputs">Nome do comprador:</div>
+                <input  data-test="client-name"required onChange={(e) => setNome(e.target.value)} placeholder="Digite seu nome..." />
+                <div className="titulo-inputs">CPF do comprador:</div>
+                <input data-test="client-cpf" type="CPF" required onChange={(e) => setCPF(e.target.value)} placeholder="Digite seu CPF..." />
+            </div>
+            <button data-test="book-seat-btn" onClick={() => Navegar()}>Reservar assento(s)</button>
+            <div data-test="footer" className="rodape">
                 <div className="moldura">
-                    <img src={image6} alt={`poster ${ASSENTOS[0].movie.title}`} />
+                    <img src={assentos.movie.posterURL} alt={`poster ${assentos.movie.title}`} />
                 </div>
                 <div className="titulos-filme">
-                <div className="titulo-filme">Enola Holmes</div>
-                <div className="titulo-filme">{ASSENTOS[0].day.weekday} - {ASSENTOS[0].name}</div>
+                    <div className="titulo-filme">{assentos.movie.title}</div>
+                    <div className="titulo-filme">{assentos.day.weekday} - {assentos.name}</div>
                 </div>
-             </div>
+            </div>
         </Conteudo>
     )
 }

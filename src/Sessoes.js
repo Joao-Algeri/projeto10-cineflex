@@ -21,7 +21,7 @@ export default function Sessoes() {
             <div className="titulo-topo">Selecione o horário</div>
             <Sessao sessao={sessao} />
 
-            <div className="rodape">
+            <div data-test="footer" className="rodape">
                 <div className="moldura">
                     <img src={sessao.posterURL} alt={`poster ${sessao.title}`} />
                 </div>

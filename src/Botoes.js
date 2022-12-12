@@ -6,11 +6,11 @@ export default function Botoes({ horarios }) {
         Navigate(endereco);
     }
     if (horarios.showtimes === undefined) {
-        return <div>Loading</div>
+        return <div>Carregando</div>
     }
     return (
         <Conteudo>
-            {horarios.showtimes.map((horario) => <button key={horario.id} onClick={() => Navegar(`/assentos/${horario.id}`)}>{horario.name}</button>)}
+            {horarios.showtimes.map((horario) => <button  data-test="showtime" key={horario.id} onClick={() => Navegar(`/assentos/${horario.id}`)}>{horario.name}</button>)}
         </Conteudo>
     )
 }
