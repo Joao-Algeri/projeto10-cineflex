@@ -278,7 +278,6 @@ export default function Assentos({ingresso,setIngresso}) {
     function Navegar(){
         const novoIngresso=[{titulo:"alula",data:"15:00",horario:"111",nome:"aaa",CPF:"aaa",assentos:[1,2,3,4,5]}]
         setIngresso(novoIngresso);
-        console.log(ingresso)
         navigate("/sucesso");
     }
     return (

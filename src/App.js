@@ -14,7 +14,7 @@ export default function App() {
       <Topo/>
       <Routes>
         <Route path="/" element={<Filmes/>}/>
-        <Route path="/sessoes" element={<Sessoes/>}/>
+        <Route path="/sessoes/:idsessao" element={<Sessoes/>}/>
         <Route path="/assentos" element={<Assentos ingresso={ingresso} setIngresso={setIngresso}/>}/>
         <Route path="/sucesso" element={<Sucesso ingresso={ingresso} setIngresso={setIngresso}/>}/>
         </Routes>

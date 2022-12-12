@@ -1,25 +1,30 @@
 import styled from "styled-components"
-import image3 from  "./img/image3.png"
-import image6 from  "./img/image6.png"
-import {Link} from 'react-router-dom'
+import { useState, useEffect } from "react"
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
-export default function Filme(){
-    const POSTERS=[image3,image6,image3,image6,image3,image6,image3,image6,image3,image6];
-    const Navigate=useNavigate();
-    function Navegar(caminho){
+export default function Filme() {
+    const Navigate = useNavigate();
+    const [filmes, setFilmes] = useState([]);
+    function Navegar(caminho) {
         Navigate(caminho);
     }
-    return (
+    useEffect(() => {
+        const requisicao = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
+        requisicao.then(resposta => { setFilmes(resposta.data) })
+    }, [])
+    if (filmes === undefined) {
+        return <div>Loading</div>
+    }
+       return (
         <Conteudo>
-            
-            {POSTERS.map((poster,index)=>
-            
-            <div onClick={()=>Navegar("/sessoes")}key={index}className="moldura">
-            <img key={index+1}src={poster} alt={`poster filme ${index+1}`}/>
-            </div>
-            
+
+            {filmes.map((poster) =>
+
+                <div onClick={() => Navegar(`/sessoes/${poster.id}`)} key={poster.id} className="moldura">
+                    <img key={poster.title} src={poster.posterURL} alt={`poster filme ${poster.title}`} />
+                </div>
             )}
-            
+
         </Conteudo>
     )
 }
@@ -39,6 +44,10 @@ justify-content: center;
     margin-left: 4%;
     margin-right: 4%;
     margin-bottom: 3%;
+}
+img{
+    height: 90%;
+    width: 90%;
 }
 .poster-container{
     width: 80vw;
