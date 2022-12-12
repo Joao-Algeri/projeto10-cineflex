@@ -58,12 +58,12 @@ export default function Sessoes(){
     )
 }
 const Conteudo=styled.div`
-margin-top: 10vh;
-height: 80vh;
-background: white;
-color:#293845;
-font-family: 'Roboto';
-font-weight: 400;
+    margin-top: 10vh;
+    height: 80vh;
+    background: white;
+    color:#293845;
+    font-family: 'Roboto';
+    font-weight: 400;
 .titulo-topo{
     height: 12vh;
     display: flex;
@@ -92,7 +92,7 @@ font-weight: 400;
         background: #C3CFD9;
         display:flex;
         align-items: center;
-        height: 15vh;
+        height: 13vh;
         width: 100vw;
         position: fixed;
         bottom:0px;
