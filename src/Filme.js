@@ -15,7 +15,7 @@ export default function Filme() {
     if (filmes === undefined) {
         return <div>Loading</div>
     }
-       return (
+    return (
         <Conteudo>
 
             {filmes.map((poster) =>
@@ -29,9 +29,9 @@ export default function Filme() {
     )
 }
 const Conteudo=styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 .moldura{
     height: 209px;
     width: 145px;

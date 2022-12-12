@@ -1,11 +1,14 @@
 import Botoes from './Botoes.js'
-export default function Sessao({ SESSAO }) {
+export default function Sessao({ sessao }) {
+  if (sessao.days == undefined) {
+    return <div>Loading</div>
+}
   return (
     <>
-      {SESSAO[0].days.map((sessao) =>
+      {sessao.days.map((SESSAO) =>
         <>
-          <div key={sessao.id} className="titulo-meio">{sessao.weekday} - {sessao.date}</div>
-          <Botoes horarios={sessao.showtimes} />
+          <div key={SESSAO.id} className="titulo-meio">{SESSAO.weekday} - {SESSAO.date}</div>
+          <Botoes horarios={SESSAO} />
         </>
       )}
     </>

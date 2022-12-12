@@ -3,7 +3,7 @@ import axios from "axios"
 import image6 from  "./img/image6.png"
 import { useNavigate } from "react-router-dom";
 import "./reset.css";
-export default function Assentos({ingresso,setIngresso}) {
+export default function Assentos({setIngresso}) {
         const ASSENTOS=[
         {
             "id": 1,

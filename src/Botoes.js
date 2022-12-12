@@ -5,10 +5,12 @@ export default function Botoes({ horarios }) {
     function Navegar(endereco) {
         Navigate(endereco);
     }
-
+    if (horarios.showtimes === undefined) {
+        return <div>Loading</div>
+    }
     return (
         <Conteudo>
-            {horarios.map((horario) => <button key={horario.id} onClick={() => Navegar("/assentos")}>{horario.name}</button>)}
+            {horarios.showtimes.map((horario) => <button key={horario.id} onClick={() => Navegar(`/assentos/${horario.id}`)}>{horario.name}</button>)}
         </Conteudo>
     )
 }
