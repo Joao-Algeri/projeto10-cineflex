@@ -3,8 +3,8 @@ import axios from "axios"
 import image6 from  "./img/image6.png"
 import { useNavigate } from "react-router-dom";
 import "./reset.css";
-export default function Assentos() {
-    const ASSENTOS=[
+export default function Assentos({ingresso,setIngresso}) {
+        const ASSENTOS=[
         {
             "id": 1,
             "name": "15:00",
@@ -276,6 +276,9 @@ export default function Assentos() {
     ]
     const navigate=useNavigate();
     function Navegar(){
+        const novoIngresso=[{titulo:"alula",data:"15:00",horario:"111",nome:"aaa",CPF:"aaa",assentos:[1,2,3,4,5]}]
+        setIngresso(novoIngresso);
+        console.log(ingresso)
         navigate("/sucesso");
     }
     return (
