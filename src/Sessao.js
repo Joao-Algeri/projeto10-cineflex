@@ -6,10 +6,10 @@ export default function Sessao({ sessao }) {
   return (
     <>
       {sessao.days.map((SESSAO) =>
-        <>
-          <div  data-test="movie-day"key={SESSAO.id} className="titulo-meio">{SESSAO.weekday} - {SESSAO.date}</div>
+        <div data-test="movie-day">
+          <div key={SESSAO.id} className="titulo-meio">{SESSAO.weekday} - {SESSAO.date}</div>
           <Botoes horarios={SESSAO} />
-        </>
+        </div>
       )}
     </>
   )
