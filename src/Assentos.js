@@ -56,10 +56,14 @@ export default function Assentos({ ingresso, setIngresso }) {
             }
         }
     }
-    function SelecionaAssento(id, nome) {
+    function SelecionaAssento(id, nome,disponivel) {
         function compararNumeros(a, b) {
             return a - b;
         }
+        if(disponivel===false){
+            alert("Assento indisponível");
+        }
+        else{
         const idNumero = Number(id);
         const nomeNumero = Number(nome);
         const novoidAssentos = [...idAssentos];
@@ -82,17 +86,18 @@ export default function Assentos({ ingresso, setIngresso }) {
             setAssentosEscolhidos(novoEscolhidos);
         }
     }
+    }
     return (
         <Conteudo>
             <div className="titulo">Selecione o(s) assento(s)</div>
             <div className="assentos-container">
                 {assentos.seats.map((assento) => assento.isAvailable === false ?
-                    <div data-test="seat" className="assento amarelo" key={assento.name}>{assento.name}</div>
+                    <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name,false)} className="assento amarelo" key={assento.name}>{assento.name}</div>
                     :
                     idAssentos.includes(assento.id) ?
-                        <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name)} className="assento verde" key={assento.id}>{assento.name}</div>
+                        <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name,true)} className="assento verde" key={assento.id}>{assento.name}</div>
                         :
-                        <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name)} className="assento" key={assento.id}>{assento.name}</div>
+                        <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name,true)} className="assento" key={assento.id}>{assento.name}</div>
 
                 )}
             </div>
@@ -113,9 +118,9 @@ export default function Assentos({ ingresso, setIngresso }) {
             </div>
             <div className="inputs">
                 <div className="titulo-inputs">Nome do comprador:</div>
-                <input  data-test="client-name"required onChange={(e) => setNome(e.target.value)} placeholder="Digite seu nome..." />
+                <input data-test="client-name" type="text" onChange={(e) => setNome(e.target.value)} placeholder="Digite seu nome..." />
                 <div className="titulo-inputs">CPF do comprador:</div>
-                <input data-test="client-cpf" type="CPF" required onChange={(e) => setCPF(e.target.value)} placeholder="Digite seu CPF..." />
+                <input data-test="client-cpf" type="text" onChange={(e) => setCPF(e.target.value)} placeholder="Digite seu CPF..." />
             </div>
             <button data-test="book-seat-btn" onClick={() => Navegar()}>Reservar assento(s)</button>
             <div data-test="footer" className="rodape">
