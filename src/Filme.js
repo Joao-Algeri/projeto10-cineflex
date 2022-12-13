@@ -20,8 +20,8 @@ export default function Filme() {
 
             {filmes.map((poster) =>
 
-                <div onClick={() => Navegar(`/sessoes/${poster.id}`)} key={poster.id}  data-test="movie" className="moldura">
-                    <img  data-test="movie" key={poster.title} src={poster.posterURL} alt={`poster filme ${poster.title}`} />
+                <div onClick={() => Navegar(`/sessoes/${poster.id}`)} key={poster.id} data-test="movie" className="moldura">
+                    <img key={poster.title} src={poster.posterURL} alt={`poster filme ${poster.title}`} />
                 </div>
             )}
 

@@ -8,11 +8,10 @@ export default function Assentos({ ingresso, setIngresso }) {
     const params = useParams();
     const navigate = useNavigate();
     const [assentos, setAssentos] = useState([]);
-    const [selecionados, setSelecionados] = useState([])
+    const [idAssentos, setIdAssentos] = useState([])
     const [nome, setNome] = useState("");
     const [CPF, setCPF] = useState("");
     const [assentosEscolhidos, setAssentosEscolhidos] = useState([]);
-    const [bilhete, setBilhete] = useState([]);
 
     useEffect(() => {
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idassento}/seats`);
@@ -22,37 +21,64 @@ export default function Assentos({ ingresso, setIngresso }) {
         return <div>Loading</div>
     }
     function Navegar() {
-        if (nome !== null && CPF !== null && nome !== "" && nome !== undefined && CPF !== "" && CPF !== undefined) {
+        function TratarSucesso() {
+            navigate("/sucesso")
+        }
+        function TratarErro(erro) {
+            console.log(erro.status)
+        }
+        function TrataEnvio(pedido) {
+            pedido.then(TratarSucesso);
+            pedido.catch(TratarErro);
+        }
+        if (
+            nome !== null && nome !== "" && nome !== undefined &&
+            CPF !== null && CPF !== "" && CPF !== undefined && CPF.length === 11 &&
+            idAssentos !== null && idAssentos !== "" && idAssentos !== undefined && idAssentos.length > 0) {
 
             const novoIngresso = [{ titulo: assentos.movie.title, data: assentos.day.date, horario: assentos.name, Nome: nome, cpf: CPF, assentos: assentosEscolhidos }]
             setIngresso(novoIngresso);
-            const pedido = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", { ids: assentosEscolhidos, name: nome, cpf: CPF })
-            pedido.then(navigate("/sucesso"))
-            pedido.catch(console.log("erro"))
-
-            // console.log({ids:assentosEscolhidos,name:nome,cpf:CPF})
-            // console.log(ingresso)
+            const pedido = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", { ids: idAssentos, name: nome, cpf: CPF })
+            TrataEnvio(pedido)
         }
         else {
-            alert("preencha os campos necessários");
+            if (nome === null || nome === "" || nome === undefined) {
+                alert("Informe seu nome");
+            }
+            else if (CPF === null || CPF === "" || CPF === undefined) {
+                alert("Informe seu CPF");
+            }
+            else if ((CPF.length > 0 && CPF.length < 11) || CPF.length > 11) {
+                alert("CPF invalido");
+            }
+            else if (idAssentos === null || idAssentos === "" || idAssentos === undefined || idAssentos.length === 0) {
+                alert("Selecione seu(s) assento(s)");
+            }
         }
     }
     function SelecionaAssento(id, nome) {
-        const novoSelecionados = [...selecionados];
+        function compararNumeros(a, b) {
+            return a - b;
+        }
+        const idNumero = Number(id);
+        const nomeNumero = Number(nome);
+        const novoidAssentos = [...idAssentos];
         const novoEscolhidos = [...assentosEscolhidos];
-        if (selecionados.includes(id)) {
+        if (idAssentos.includes(idNumero)) {
 
-            novoSelecionados.splice(novoSelecionados.indexOf(id), 1);
-            novoSelecionados = novoSelecionados.sort();
-            novoEscolhidos.splice(novoSelecionados.indexOf(nome), 1);
-            novoEscolhidos = novoEscolhidos.sort();
-            setSelecionados(novoSelecionados);
+            novoidAssentos.splice(novoidAssentos.indexOf(idNumero), 1);
+            novoidAssentos.sort();
+            novoEscolhidos.splice(novoidAssentos.indexOf(nomeNumero), 1);
+            novoEscolhidos.sort();
+            setIdAssentos(novoidAssentos);
             setAssentosEscolhidos(novoEscolhidos);
         }
         else {
-            novoSelecionados.push(id);
-            novoEscolhidos.push(nome);
-            setSelecionados(novoSelecionados);
+            novoidAssentos.push(idNumero);
+            novoidAssentos.sort(compararNumeros);
+            novoEscolhidos.push(nomeNumero);
+            novoEscolhidos.sort(compararNumeros);
+            setIdAssentos(novoidAssentos);
             setAssentosEscolhidos(novoEscolhidos);
         }
     }
@@ -63,7 +89,7 @@ export default function Assentos({ ingresso, setIngresso }) {
                 {assentos.seats.map((assento) => assento.isAvailable === false ?
                     <div data-test="seat" className="assento amarelo" key={assento.name}>{assento.name}</div>
                     :
-                    selecionados.includes(assento.id) ?
+                    idAssentos.includes(assento.id) ?
                         <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name)} className="assento verde" key={assento.id}>{assento.name}</div>
                         :
                         <div data-test="seat" onClick={() => SelecionaAssento(assento.id, assento.name)} className="assento" key={assento.id}>{assento.name}</div>

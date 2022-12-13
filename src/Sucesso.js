@@ -5,20 +5,15 @@ export default function Sucesso({ ingresso, setIngresso }) {
     function FinalizarPedido() {
         navigate("/");
     }
-
-    console.log(ingresso);
-
-
-
     return (
         <Conteudo>
             <div className="titulo-topo">Pedido feito<br /> com sucesso!</div>
-            <div data-test="movie-info"className="titulos">
+            <div data-test="movie-info" className="titulos">
                 <div className="titulo-meio">Filme e sessão</div>
                 <div className="titulo-inferior">{ingresso[0].titulo}</div>
                 <div className="titulo-inferior">{ingresso[0].data} {ingresso[0].horario}</div>
             </div>
-            <div data-test="seats-info"className="titulos">
+            <div data-test="seats-info" className="titulos">
                 <div className="titulo-meio">Ingressos</div>
                 {ingresso[0].assentos.map((assento) =>
                     <div key={assento} className="titulo-inferior">Assento {assento}</div>
@@ -29,7 +24,7 @@ export default function Sucesso({ ingresso, setIngresso }) {
             <div data-test="client-info" className="titulos">
                 <div className="titulo-meio">Comprador</div>
                 <div className="titulo-inferior">Nome: {ingresso[0].Nome}</div>
-                <div className="titulo-inferior">CPF: {ingresso[0].cpf}</div>
+                <div className="titulo-inferior">CPF: {ingresso[0].cpf.substring(0, 3)}.{ingresso[0].cpf.substring(3, 6)}.{ingresso[0].cpf.substring(6, 9)}-{ingresso[0].cpf.substring(9, 11)}</div>
             </div>
             <button data-test="go-home-btn" onClick={() => FinalizarPedido()}>Voltar pra home</button>
         </Conteudo>
